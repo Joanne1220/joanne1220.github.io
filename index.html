@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Joanne 的国际化个人品牌主页，连接香港、新加坡与全球市场。">
+  <meta name="theme-color" content="#fbf4ef">
+  <meta property="og:title" content="Joanne | Finance · Global Trade · Business">
+  <meta property="og:description" content="Connecting opportunities across Hong Kong, Singapore and the world.">
+  <meta property="og:image" content="assets/social-preview.jpg">
+  <meta property="og:type" content="website">
+  <title>Joanne | Finance · Global Trade · Business</title>
+  <style>
+    :root{
+      --bg:#fbf7f3;--surface:rgba(255,255,255,.78);--surface-solid:#fff;
+      --text:#2d201b;--muted:#786a62;--line:rgba(92,62,45,.13);
+      --accent:#a96f45;--accent-2:#c99872;--rose:#d8a29c;
+      --shadow:0 28px 70px rgba(72,47,33,.14);--radius:28px;
+    }
+    html[data-theme="dark"]{
+      --bg:#1d1816;--surface:rgba(36,29,26,.82);--surface-solid:#28211e;
+      --text:#f6eee9;--muted:#c8b7ad;--line:rgba(255,255,255,.12);
+      --accent:#d5a178;--accent-2:#b97f59;--rose:#c98e88;
+      --shadow:0 28px 70px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:
+      radial-gradient(circle at 5% 5%,rgba(216,162,156,.16),transparent 24%),
+      radial-gradient(circle at 93% 12%,rgba(201,152,114,.17),transparent 28%),
+      var(--bg);
+      color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,
+      "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;
+      transition:background .35s,color .35s;
+    }
+    body.lang-en .zh{display:none!important}
+    body:not(.lang-en) .en{display:none!important}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button{font:inherit}
+    .shell{width:min(1180px,calc(100% - 34px));margin:auto}
+    .loader{
+      position:fixed;inset:0;z-index:999;background:var(--bg);display:grid;place-items:center;
+      transition:opacity .7s ease,visibility .7s ease;
+    }
+    .loader.hide{opacity:0;visibility:hidden}
+    .loader-mark{font-family:Georgia,serif;font-size:clamp(48px,8vw,92px);font-style:italic;color:var(--accent);animation:pulse 1.2s ease-in-out infinite}
+    @keyframes pulse{50%{opacity:.45;transform:scale(.98)}}
+    .nav{
+      position:sticky;top:0;z-index:50;border-bottom:1px solid transparent;
+      background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(18px);
+    }
+    .nav.scrolled{border-color:var(--line)}
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{font-family:Georgia,serif;font-size:28px;color:var(--accent);letter-spacing:.3px}
+    .nav-links{display:flex;gap:24px;font-size:14px;font-weight:650}
+    .nav-links a{position:relative}
+    .nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:1px;background:var(--accent);transition:.25s}
+    .nav-links a:hover:after{right:0}
+    .tools{display:flex;gap:9px}
+    .tool{
+      border:1px solid var(--line);background:var(--surface);color:var(--text);
+      border-radius:999px;padding:9px 13px;cursor:pointer;backdrop-filter:blur(12px)
+    }
+    .hero{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:48px;padding:55px 0 70px}
+    .eyebrow{font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+    h1{font-family:Georgia,serif;font-size:clamp(72px,10vw,132px);font-weight:500;font-style:italic;line-height:.88;margin:14px 0;color:var(--accent)}
+    .hero-kicker{font-family:Georgia,serif;font-style:italic;font-size:24px;color:var(--accent-2)}
+    .lead{font-size:19px;color:var(--muted);max-width:650px;margin-top:18px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;border:1px solid var(--line);font-weight:750;transition:.25s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 14px 25px rgba(74,45,31,.15)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent-2),var(--accent));color:#fff;border-color:transparent}
+    .portrait-wrap{position:relative}
+    .portrait-card{position:relative;min-height:650px;border-radius:42px;overflow:hidden;box-shadow:var(--shadow);background:#d8c2b3}
+    .portrait-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .portrait-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(29,19,14,.56))}
+    .portrait-caption{position:absolute;z-index:2;left:26px;right:26px;bottom:23px;color:#fff}
+    .portrait-caption strong{font-family:Georgia,serif;font-size:28px;font-weight:500}
+    .portrait-caption span{display:block;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;opacity:.86}
+    .orb{position:absolute;border-radius:50%;filter:blur(2px);z-index:-1}
+    .orb.one{width:170px;height:170px;background:rgba(216,162,156,.28);right:-45px;top:-25px}
+    .orb.two{width:115px;height:115px;background:rgba(201,152,114,.26);left:-36px;bottom:90px}
+    .values{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow);margin-top:-38px;position:relative;z-index:4}
+    .value{padding:27px 20px;background:var(--surface);backdrop-filter:blur(16px);text-align:center}
+    .value b{display:block;font-family:Georgia,serif;font-size:20px;margin-bottom:5px}
+    .value span{font-size:13px;color:var(--muted)}
+    section{padding:92px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:34px}
+    .section-head h2{font-family:Georgia,serif;font-size:clamp(38px,5vw,61px);font-weight:500;font-style:italic;color:var(--accent);margin:0;line-height:1}
+    .section-head p{max-width:540px;color:var(--muted);margin:0}
+    .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px}
+    .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 50px rgba(72,47,33,.08);backdrop-filter:blur(15px)}
+    .about-photo{overflow:hidden;min-height:430px}
+    .about-photo img{width:100%;height:100%;object-fit:cover}
+    .about-copy{padding:38px}
+    .about-copy p{font-size:18px;color:var(--muted)}
+    .focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .focus-card{padding:31px;transition:.3s}
+    .focus-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+    .focus-card .icon{font-size:28px;margin-bottom:18px}
+    .focus-card h3{font-family:Georgia,serif;font-size:24px;margin:0 0 10px}
+    .focus-card p{color:var(--muted);margin:0}
+    .journey{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative}
+    .journey:before{content:"";position:absolute;left:10%;right:10%;top:29px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+    .step{position:relative;padding:58px 26px 27px;text-align:center}
+    .step:before{content:"";position:absolute;top:21px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--surface-solid);border:4px solid var(--accent)}
+    .step small{color:var(--accent);font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+    .step h3{font-family:Georgia,serif;font-size:23px;margin:7px 0}
+    .step p{color:var(--muted);margin:0}
+    .philosophy{padding:56px;text-align:center;position:relative;overflow:hidden}
+    .philosophy:before{content:"“";position:absolute;left:24px;top:-35px;font-family:Georgia,serif;font-size:180px;color:rgba(201,152,114,.15)}
+    .quote{font-family:Georgia,serif;font-size:clamp(30px,4vw,48px);font-style:italic;color:var(--accent);max-width:900px;margin:auto;line-height:1.35}
+    .signature{font-family:Georgia,serif;font-size:30px;font-style:italic;color:var(--accent);margin-top:20px}
+    .gallery{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+    .gallery-card{position:relative;min-height:360px;border-radius:22px;overflow:hidden;cursor:pointer;box-shadow:0 14px 30px rgba(50,30,20,.12)}
+    .gallery-card img{width:100%;height:100%;object-fit:cover;transition:.5s}
+    .gallery-card:hover img{transform:scale(1.06)}
+    .gallery-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(20,13,10,.82))}
+    .gallery-label{position:absolute;z-index:2;left:16px;right:14px;bottom:14px;color:#fff}
+    .gallery-label b{display:block;font-family:Georgia,serif;font-size:20px}
+    .gallery-label span{font-size:11px;opacity:.85}
+    .contact{padding:66px 36px;text-align:center;background:linear-gradient(135deg,rgba(169,111,69,.92),rgba(105,65,45,.96));color:#fff;border-radius:36px;box-shadow:var(--shadow)}
+    .contact h2{font-family:Georgia,serif;font-size:clamp(42px,6vw,68px);font-style:italic;font-weight:500;margin:0}
+    .contact p{max-width:660px;margin:12px auto 24px;opacity:.86}
+    .contact .btn{border-color:rgba(255,255,255,.35);color:#fff}
+    .contact .btn.primary{background:#fff;color:#603f2e}
+    footer{display:flex;justify-content:space-between;gap:24px;padding:34px 0 46px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+    .reveal.visible{opacity:1;transform:none}
+    .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:25px;background:rgba(13,9,7,.82);backdrop-filter:blur(12px)}
+    .modal.open{display:flex}
+    .modal img{max-width:min(1080px,94vw);max-height:86vh;border-radius:24px;box-shadow:0 30px 90px #000}
+    .modal-close{position:absolute;right:25px;top:20px;border:0;background:#fff;color:#281b15;width:44px;height:44px;border-radius:50%;font-size:24px;cursor:pointer}
+    @media(max-width:1050px){.gallery{grid-template-columns:repeat(4,1fr)}.gallery-card{min-height:280px}}
+    @media(max-width:860px){
+      .nav-links{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding-top:35px}.portrait-card{min-height:520px}
+      .values{grid-template-columns:repeat(2,1fr);margin-top:20px}.about-grid{grid-template-columns:1fr}
+      .focus-grid,.journey{grid-template-columns:1fr}.journey:before{display:none}.step{padding-top:25px;text-align:left}
+      .step:before{left:0;top:30px}.step{padding-left:35px}.gallery{grid-template-columns:repeat(2,1fr)}.gallery-card{min-height:300px}
+      .section-head{display:block}.section-head p{margin-top:15px}footer{display:block;text-align:center}
+    }
+    @media(max-width:520px){.gallery{grid-template-columns:1fr}.gallery-card{min-height:370px}.values{grid-template-columns:1fr}h1{font-size:76px}.philosophy{padding:42px 22px}}
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader"><div class="loader-mark">Joanne</div></div>
+
+  <header class="nav" id="nav">
+    <div class="shell nav-inner">
+      <a class="brand" href="#home">Joanne</a>
+      <nav class="nav-links">
+        <a href="#about"><span class="zh">关于</span><span class="en">About</span></a>
+        <a href="#business"><span class="zh">业务</span><span class="en">Business</span></a>
+        <a href="#journey"><span class="zh">经历</span><span class="en">Journey</span></a>
+        <a href="#lifestyle"><span class="zh">生活方式</span><span class="en">Lifestyle</span></a>
+        <a href="#contact"><span class="zh">联系</span><span class="en">Contact</span></a>
+      </nav>
+      <div class="tools">
+        <button class="tool" id="langBtn">EN</button>
+        <button class="tool" id="themeBtn" aria-label="切换主题">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <section class="hero reveal" id="home">
+        <div>
+          <div class="eyebrow">Hong Kong · Singapore · Global</div>
+          <h1>Joanne</h1>
+          <div class="hero-kicker">Finance · Global Trade · Business</div>
+          <p class="lead zh">连接香港、新加坡与全球市场。拥有金融与财富管理背景，目前专注跨境批发、在线业务与长期合作关系。</p>
+          <p class="lead en">Connecting opportunities across Hong Kong, Singapore and the world. With a background in finance and wealth management, I now focus on cross-border wholesale, online business and long-term partnerships.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://wa.me/6586436037?text=Hello%20Joanne%2C%20I%20found%20your%20personal%20website%20and%20would%20like%20to%20connect%20with%20you." target="_blank" rel="noopener">◉ WhatsApp</a>
+            <a class="btn" href="https://www.instagram.com/xovilkikum/" target="_blank" rel="noopener">◎ Instagram</a>
+          </div>
+        </div>
+        <div class="portrait-wrap">
+          <div class="orb one"></div><div class="orb two"></div>
+          <div class="portrait-card">
+            <img src="assets/profile.jpg" alt="Joanne portrait">
+            <div class="portrait-caption">
+              <strong>Joanne</strong>
+              <span>Finance · Global Trade · Long-term Relationships</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="values reveal">
+        <div class="value"><b><span class="zh">全球视野</span><span class="en">Global Perspective</span></b><span class="zh">连接不同市场</span><span class="en">Connecting markets</span></div>
+        <div class="value"><b><span class="zh">长期合作</span><span class="en">Long-term Partnerships</span></b><span class="zh">以信任创造价值</span><span class="en">Value built on trust</span></div>
+        <div class="value"><b><span class="zh">持续成长</span><span class="en">Sustainable Growth</span></b><span class="zh">共同创造机会</span><span class="en">Creating opportunities</span></div>
+        <div class="value"><b><span class="zh">专业与品质</span><span class="en">Excellence</span></b><span class="zh">重视诚信和质量</span><span class="en">Quality and integrity</span></div>
+      </div>
+
+      <section id="about" class="reveal">
+        <div class="section-head">
+          <h2><span class="zh">关于我</span><span class="en">About Me</span></h2>
+          <p class="zh">金融背景与全球商业视野相结合，重视专业、长期价值和真实的人际连接。</p>
+          <p class="en">Combining a finance background with a global business perspective, with an emphasis on professionalism, long-term value and meaningful connections.</p>
+        </div>
+        <div class="about-grid">
+          <div class="panel about-photo"><img src="assets/profile.jpg" alt="Joanne"></div>
+          <article class="panel about-copy">
+            <p class="zh">我目前往返于香港与新加坡，专注全球批发与跨境在线业务。过去的金融与财富管理经历，让我更加重视风险判断、客户关系和长期价值。</p>
+            <p class="zh">我相信，真正有价值的合作不是一次交易，而是建立在信任、专业与共同成长之上的长期关系。</p>
+            <p class="en">I am currently based between Hong Kong and Singapore, focusing on global wholesale and cross-border online business. My experience in finance and wealth management shaped the way I approach risk, relationships and long-term value.</p>
+            <p class="en">I believe meaningful business is not defined by a single transaction, but by trust, professionalism and shared growth over time.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="business" class="reveal">
+        <div class="section-head">
+          <h2><span class="zh">业务方向</span><span class="en">Business Focus</span></h2>
+          <p class="zh">围绕全球贸易、金融思维与跨市场合作，连接产品、客户和长期机会。</p>
+          <p class="en">Connecting products, clients and long-term opportunities through global trade, financial thinking and cross-market collaboration.</p>
+        </div>
+        <div class="focus-grid">
+          <article class="panel focus-card"><div class="icon">◉</div><h3><span class="zh">全球批发</span><span class="en">Global Wholesale</span></h3><p class="zh">产品采购、供应链连接与跨境市场合作。</p><p class="en">Product sourcing, supply-chain connections and cross-border market collaboration.</p></article>
+          <article class="panel focus-card"><div class="icon">↗</div><h3><span class="zh">财富与金融</span><span class="en">Wealth & Finance</span></h3><p class="zh">以长期资产配置、风险意识和价值判断支持商业决策。</p><p class="en">Supporting business decisions with long-term allocation, risk awareness and value-oriented thinking.</p></article>
+          <article class="panel focus-card"><div class="icon">◇</div><h3><span class="zh">商业连接</span><span class="en">Business Connections</span></h3><p class="zh">连接香港、新加坡及其他国际市场中的合作机会。</p><p class="en">Connecting partnership opportunities across Hong Kong, Singapore and international markets.</p></article>
+        </div>
+      </section>
+
+      <section id="journey" class="reveal">
+        <div class="section-head">
+          <h2><span class="zh">教育与职业旅程</span><span class="en">Education & Career Journey</span></h2>
+          <p class="zh">从金融学习、财富管理到全球业务，每一步都在建立更完整的商业视角。</p>
+          <p class="en">From financial education and wealth management to global business, each stage has shaped a broader commercial perspective.</p>
+        </div>
+        <div class="journey">
+          <article class="panel step"><small>Education</small><h3><span class="zh">NUS 金融硕士</span><span class="en">Master of Finance, NUS</span></h3><p class="zh">建立金融市场、分析与资产配置基础。</p><p class="en">Built a strong foundation in financial markets, analysis and asset allocation.</p></article>
+          <article class="panel step"><small>Experience</small><h3><span class="zh">财富管理总监</span><span class="en">Wealth Management Director</span></h3><p class="zh">积累客户关系、财富规划与金融服务管理经验。</p><p class="en">Developed experience in client relationships, wealth planning and financial service management.</p></article>
+          <article class="panel step"><small>Current</small><h3><span class="zh">全球批发在线业务</span><span class="en">Global Wholesale Online Business</span></h3><p class="zh">连接产品、市场与跨境合作机会。</p><p class="en">Connecting products, markets and cross-border partnership opportunities.</p></article>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="panel philosophy">
+          <div class="quote zh">成功建立在信任、持续行动与长期视野之上。</div>
+          <div class="quote en">Success is built on trust, consistency and long-term vision.</div>
+          <div class="signature">Joanne</div>
+        </div>
+      </section>
+
+      <section id="lifestyle" class="reveal">
+        <div class="section-head">
+          <h2><span class="zh">工作之外</span><span class="en">Beyond Business</span></h2>
+          <p class="zh">旅行、投资、运动与审美，让生活保持开放、专注和持续成长。</p>
+          <p class="en">Travel, investing, sports and aesthetics keep life open, focused and continuously evolving.</p>
+        </div>
+        <div class="gallery">
+          <article class="gallery-card" data-img="assets/travel.jpg"><img src="assets/travel.jpg" alt="Travel"><div class="gallery-label"><b><span class="zh">旅行</span><span class="en">Travel</span></b><span>Exploring new cultures</span></div></article><article class="gallery-card" data-img="assets/investing.jpg"><img src="assets/investing.jpg" alt="Investing"><div class="gallery-label"><b><span class="zh">投资</span><span class="en">Investing</span></b><span>Global markets & value</span></div></article><article class="gallery-card" data-img="assets/golf.jpg"><img src="assets/golf.jpg" alt="Golf"><div class="gallery-label"><b><span class="zh">高尔夫</span><span class="en">Golf</span></b><span>Focus & long-term thinking</span></div></article><article class="gallery-card" data-img="assets/badminton.jpg"><img src="assets/badminton.jpg" alt="Badminton"><div class="gallery-label"><b><span class="zh">羽毛球</span><span class="en">Badminton</span></b><span>Energy & balance</span></div></article><article class="gallery-card" data-img="assets/wellness.jpg"><img src="assets/wellness.jpg" alt="Wellness"><div class="gallery-label"><b><span class="zh">健康生活</span><span class="en">Wellness</span></b><span>Pilates & yoga</span></div></article><article class="gallery-card" data-img="assets/reading.jpg"><img src="assets/reading.jpg" alt="Reading"><div class="gallery-label"><b><span class="zh">阅读</span><span class="en">Reading</span></b><span>Business & growth</span></div></article><article class="gallery-card" data-img="assets/collecting.jpg"><img src="assets/collecting.jpg" alt="Collecting"><div class="gallery-label"><b><span class="zh">收藏</span><span class="en">Collecting</span></b><span>Art, watches & antiques</span></div></article>
+        </div>
+      </section>
+
+      <section id="contact" class="reveal">
+        <div class="contact">
+          <h2><span class="zh">建立有价值的连接</span><span class="en">Let’s Connect</span></h2>
+          <p class="zh">欢迎就全球贸易、商业合作、金融观点及长期合作机会与我联系。</p>
+          <p class="en">Open to conversations about global trade, business collaboration, financial perspectives and long-term partnerships.</p>
+          <div class="actions" style="justify-content:center">
+            <a class="btn primary" href="https://wa.me/6586436037?text=Hello%20Joanne%2C%20I%20found%20your%20personal%20website%20and%20would%20like%20to%20connect%20with%20you." target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn" href="https://www.instagram.com/xovilkikum/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>Joanne · Hong Kong · Singapore · Global</div>
+        <div>© 2026 Joanne. All rights reserved.</div>
+      </footer>
+    </div>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <button class="modal-close" id="modalClose">×</button>
+    <img id="modalImg" alt="Gallery preview">
+  </div>
+
+  <script>
+    const body=document.body, html=document.documentElement;
+    window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),450));
+    window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
+
+    document.getElementById('langBtn').addEventListener('click',e=>{
+      body.classList.toggle('lang-en');
+      const en=body.classList.contains('lang-en');
+      e.currentTarget.textContent=en?'中文':'EN';
+      html.lang=en?'en':'zh-CN';
+      localStorage.setItem('joanneLang',en?'en':'zh');
+    });
+    if(localStorage.getItem('joanneLang')==='en') document.getElementById('langBtn').click();
+
+    document.getElementById('themeBtn').addEventListener('click',e=>{
+      const dark=html.dataset.theme!=='dark';
+      html.dataset.theme=dark?'dark':'light';
+      e.currentTarget.textContent=dark?'☀':'☾';
+      localStorage.setItem('joanneTheme',dark?'dark':'light');
+    });
+    if(localStorage.getItem('joanneTheme')==='dark') document.getElementById('themeBtn').click();
+
+    const observer=new IntersectionObserver(entries=>entries.forEach(x=>{
+      if(x.isIntersecting) x.target.classList.add('visible')
+    }),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(x=>observer.observe(x));
+
+    const modal=document.getElementById('modal'),modalImg=document.getElementById('modalImg');
+    document.querySelectorAll('.gallery-card').forEach(card=>card.addEventListener('click',()=>{
+      modalImg.src=card.dataset.img;modal.classList.add('open');modal.setAttribute('aria-hidden','false')
+    }));
+    const closeModal=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')};
+    document.getElementById('modalClose').addEventListener('click',closeModal);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  </script>
+</body>
+</html>
